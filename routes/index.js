@@ -8,6 +8,7 @@ var chargeMetaData = require('./chargeMetaData.js');
 var modifyAttribute = require('./modifyAttribute.js');
 
 
+
 router.post('/user/register', function(req, res) {
     console.log ('***** register route processing....');
     var activeAuth = auth();
