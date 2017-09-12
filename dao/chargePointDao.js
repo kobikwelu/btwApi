@@ -32,8 +32,6 @@ module.exports = function () {
 				station_phone          : 1,
 				updated_at             : 1,
 				geocode_status         : 1,
-				latitude               : 1,
-				longitude              : 1,
 				city                   : 1,
 				intersection_directions: 1,
 				plus4                  : 1,
@@ -55,7 +53,8 @@ module.exports = function () {
 				ng_psi                 : 1,
 				ng_vehicle_class       : 1,
 				station                : 1,
-				posts                  : 1
+				posts                  : 1,
+				location               : 1
 			}, {limit: 200}, function (err, docs) {
 				if (err || typeof docs[0] === 'undefined') {
 					res.status(503);
