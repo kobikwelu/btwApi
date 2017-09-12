@@ -93,18 +93,21 @@ module.exports = function () {
 			})
 		}
 	};
-	//The solution is to ensure the longitude and latitude are stored in an array field in the DB
-	//that array field should then be indexed with the ensure index. The array field should then be thus {<dbarray field> : 2d}
+
+	/**
+	 *
+	 * @param table
+	 * @param item
+	 * @param res
+	 */
 	var getAllChargingPointsBy = function (table, item, res) {
 		if (table === 'chargePoints') {
 			console.log('Starting get query for charging points by location.....');
-			mongoDBChargePoints.EV_ChargePoints.ensureIndex();
+			mongoDBChargePoints.EV_ChargePoints.ensureIndex({"location": "2d"});
 			mongoDBChargePoints.EV_ChargePoints.find({
-					latitude: {
-						$near: {
-							$geometry   : {type: "Point", coordinates: [Number(item[0]), Number(item[1])]},
-							$maxDistance: 300
-						}
+					"location": {
+						$near       : [parseFloat(item[0]), parseFloat(item[1])],
+						$maxDistance: 0.0029452431127405185
 					}
 				}, function (err, docs) {
 					if (err) {
@@ -121,6 +124,7 @@ module.exports = function () {
 			)
 		}
 	}
+
 	return {
 		getAllChargingPoints     : function (table, res) {
 			console.log('***** CHARGINGPOINT DAO .....');
