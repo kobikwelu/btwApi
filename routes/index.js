@@ -51,11 +51,10 @@ router.get('/api/v1/getChargingPointsMetaData', function(req, res) {
  * utility methods
  * @type {core.Router|*}
  */
-
 router.post('/api/v1/modifyFieldAttribute', function(req, res) {
     console.log ('***** calling utility method modify field attribute');
-    var modifyAttribute = modifyAttribute();
-    modifyAttribute.updateAttribute(req, res);
+    var attribute  = modifyAttribute();
+    attribute.updateAttribute(req, res);
 });
 
 module.exports = router;
