@@ -20,7 +20,7 @@ module.exports = function (){
             payLoad.push(email);
             payLoad.push(role);
 
-            if (username === '' || password === '' || email === '') {
+            if (username === '' || password === '' || email === '' || role === '') {
                 res.status(422);
                 res.json({
                     "status": 422,

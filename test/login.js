@@ -9,7 +9,8 @@ var superTest = require('supertest');
 var localHost = superTest('http://localhost:4252');
 
 
-describe('Login based tests', function () {
+describe('Login based tests  ----- ', function () {
+
 	it('successful login - expect a 200 response', function (done) {
 		localHost.post('/user/login')
 			.set('Content-Type', 'application/json')
@@ -37,6 +38,7 @@ describe('Login based tests', function () {
 			.expect(401)
 			.end(function (err, res) {
 				expect(res.body.message).to.equal('Invalid credentials');
+				expect(res.body.message).to.not.equal('null');
 				done();
 			})
 	})
@@ -51,6 +53,7 @@ describe('Login based tests', function () {
 			.expect(401)
 			.end(function (err, res) {
 				expect(res.body.message).to.equal('Invalid credentials');
+				expect(res.body.message).to.not.equal('null');
 				done();
 			})
 	})
@@ -65,6 +68,7 @@ describe('Login based tests', function () {
 			.expect(401)
 			.end(function (err, res) {
 				expect(res.body.message).to.equal('Invalid credentials');
+				expect(res.body.message).to.not.equal('null');
 				done();
 			})
 	})
@@ -78,6 +82,7 @@ describe('Login based tests', function () {
 			.expect(401)
 			.end(function (err, res) {
 				expect(res.body.message).to.equal('Invalid credentials');
+				expect(res.body.message).to.not.equal('null');
 				done();
 			})
 	})
@@ -91,6 +96,7 @@ describe('Login based tests', function () {
 			.expect(401)
 			.end(function (err, res) {
 				expect(res.body.message).to.equal('Invalid credentials');
+				expect(res.body.message).to.not.equal('null');
 				done();
 			})
 	})
@@ -103,6 +109,7 @@ describe('Login based tests', function () {
 			.expect(401)
 			.end(function (err, res) {
 				expect(res.body.message).to.equal('Invalid credentials');
+				expect(res.body.message).to.not.equal('null');
 				done();
 			})
 	})
