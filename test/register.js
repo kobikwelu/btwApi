@@ -9,6 +9,7 @@ var localHost = superTest('http://localhost:4252');
 
 describe('Registration based tests  ----- ', function () {
 
+
 	it('failed registration - email exists with all matching fields', function (done) {
 		localHost.post('/user/register')
 			.set('Content-Type', 'application/json')

@@ -57,6 +57,28 @@ module.exports = function (){
                 var dao = userDao();
                 dao.getRole(item, req, res, next);
             }
+        },
+        deleteUser: function(req, res){
+            console.log ('***** Auth route ..... delete user processing....');
+            var username = req.body.username || '';
+            var password = req.body.password || '';
+            var email = req.body.email || '';
+
+            var payLoad = [];
+            payLoad.push(username);
+            payLoad.push(password);
+            payLoad.push(email);
+            if (username === '' || password === '' || email === '') {
+                res.status(422);
+                res.json({
+                    "status": 422,
+                    "message": "Missing required parameters"
+                });
+            } else {
+                var dao = userDao();
+                dao.deleteAccount(payLoad, 'user', res);
+            }
+
         }
     }
 }

@@ -8,7 +8,6 @@ var chargeMetaData = require('./chargeMetaData.js');
 var modifyAttribute = require('./modifyAttribute.js');
 
 
-
 router.post('/user/register', function(req, res) {
     console.log ('***** register route processing....');
     var activeAuth = auth();
@@ -30,6 +29,7 @@ router.get('/api/v1/getAllChargingPoints', function(req, res) {
     var charge = chargePoint();
     charge.getAllChargingPoints(req, res)
 });
+
 
 router.get('/api/v1/getChargingPointBy', function(req, res) {
     console.log ('***** get All charging point by route processing....');
@@ -56,6 +56,17 @@ router.post('/api/v1/modifyFieldAttribute', function(req, res) {
     console.log ('***** calling utility method modify field attribute');
     var attribute  = modifyAttribute();
     attribute.updateAttribute(req, res);
+});
+
+
+/**
+ * delete methods
+ * @type {core.Router|*}
+ */
+router.post('/api/v1/deleteUser', function(req, res) {
+    console.log ('***** delete User route processing....');
+    var activeAuth = auth();
+    activeAuth.deleteUser(req, res);
 });
 
 module.exports = router;
