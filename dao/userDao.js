@@ -14,16 +14,18 @@ var mongoDBChargePointUser = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' 
 
 module.exports = function () {
 
-	function genToken() {
+	function genToken(role) {
 		console.log('getToken starts....');
 		var expires = expiresIn(0.0098);
 		var token = jwt.encode({
-			exp: expires
+			exp: expires,
+			role: role
 		}, require('../config/secret')());
 
 		return {
 			token  : token,
-			expires: expires
+			expires: expires,
+			role: role
 		};
 	}
 
@@ -62,7 +64,7 @@ module.exports = function () {
 							bcrypt.compare(item[1], docs[0]['user']['password'], function (err, doesMatch) {
 								if (doesMatch) {
 									console.log('success!! issuing token..');
-									res.json(genToken());
+									res.json(genToken(docs[0]['user']['role']));
 								} else {
 									res.status(401);
 									res.json({

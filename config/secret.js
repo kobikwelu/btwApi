@@ -4,5 +4,5 @@
 
 
 module.exports = function() {
-    return 'electric.charging.points';
+    return 'D1167581881CAB2DA0974D5E367946EC1D7F5DD9329670C1C5EF2C413ED37583';
 }

@@ -66,7 +66,7 @@ describe('ChargePoints based tests  ----- ', function () {
 	it('failed retrieval - expired X-token', function (done) {
 		localHost.get('/api/v1/getAllChargingPoints')
 			.set('Content-Type', 'application/json')
-			.set('x-access-token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDUyMDA4OTk3MTF9.n2Fj6Xz8p5kpl0fEcZsy2jwl32Y9M2kXkYsJV-NLPgA')
+			.set('x-access-token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDU1MTgzODc1ODMsInJvbGUiOiJhZG1pbiJ9.4m8lUzRAASYFqKan3iQCyg79CGomCnF1XSyqrUZuskw')
 			.set('x-key', 'kobikwelu')
 			.end(function (err, res) {
 				expect(res.status).to.equal(400);

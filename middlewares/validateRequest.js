@@ -24,6 +24,7 @@ module.exports = function(req, res, next) {
                     "message": "Token Expired. Please generate a new Token"
                 });
                 return;
+
             }else {
                 console.log ('token is still valid. Proceeding to secured resource');
             }
