@@ -24,8 +24,6 @@ describe('ChargePoints based tests  ----- ', function () {
 					.end(function (err, res) {
 						expect(res.status).to.equal(200);
 						expect(res.body).to.not.equal('null');
-						expect(res.body.fuel_type_code).to.equal('ELEC');
-						expect(res.body.station_name).to.not.equal('null');
 						done();
 					})
 			})
@@ -91,8 +89,8 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'wrongKey')
 					.end(function (err, res) {
-						expect(res.status).to.equal(400);
-						expect(res.body.message).to.equal('Invalid user Key. Register to use');
+						expect(res.status).to.equal(401);
+						expect(res.body.message).to.equal('Invalid User');
 						done();
 					})
 			})

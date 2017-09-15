@@ -146,7 +146,15 @@ module.exports = function () {
             var getUserRole = function (item, req, res, next) {
                 mongoDBChargePointUser.EV_User.find({"user.username": item[0]}, function (err, docs) {
                     if (err === null) {
-                        if (typeof docs !== 'undefined') {
+                        console.log ('dsfsdf' + docs[0]);
+                        if (typeof docs[0] === 'undefined') {
+                            // No user with this name exists, respond back with a 401
+                            res.status(401);
+                            res.json({
+                                "status": 401,
+                                "message": "Invalid User"
+                            });
+                        } else {
                             if ((req.url.indexOf('admin') >= 0 && docs[0]['user']['role'] === 'admin') || (req.url.indexOf('admin') < 0 && req.url.indexOf('/api/v1/') >= 0)) {
                                 console.log('user is authorized to access the resource' + req.url);
                                 next();
@@ -157,13 +165,6 @@ module.exports = function () {
                                     "message": "Not Authorized"
                                 });
                             }
-                        } else {
-                            // No user with this name exists, respond back with a 401
-                            res.status(401);
-                            res.json({
-                                "status": 401,
-                                "message": "Invalid User"
-                            });
                         }
                     } else {
                         console.log(err)
