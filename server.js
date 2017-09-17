@@ -56,7 +56,7 @@ app.use('/', require('./routes/index'));
 
 // If no route is matched by now, it must be a 404
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error('No resource found');
     err.status = 404;
     next(err);
 });
