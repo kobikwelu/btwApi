@@ -147,9 +147,7 @@ module.exports = function () {
 	var getUserRole = function (item, req, res, next) {
 		mongoDBChargePointUser.EV_User.find({"user.username": item[0]}, function (err, docs) {
 			if (err === null) {
-				console.log('dsfsdf' + docs[0]);
 				if (typeof docs[0] === 'undefined') {
-					// No user with this name exists, respond back with a 401
 					res.status(401);
 					res.json({
 						"status" : 401,
