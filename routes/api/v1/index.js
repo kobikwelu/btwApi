@@ -19,16 +19,10 @@ router.get('/getAllChargingPoints', function (req, res) {
 	charge.getAllChargingPoints(req, res)
 });
 
-
 router.get('/getChargingPointBy', function (req, res) {
 	console.log('***** get All charging point by route processing....');
 	var charge = chargePoint();
 	charge.getChargingPointBy(req, res);
-});
-
-router.get('/addChargingPoint', function (req, res) {
-	console.log('***** add charging point route processing....');
-
 });
 
 router.get('/getChargingPointsMetaData', function (req, res) {
@@ -37,21 +31,26 @@ router.get('/getChargingPointsMetaData', function (req, res) {
 	metaData.getChargingPointsMetaData(req, res)
 });
 
-/**
- * utility methods
- * @type {core.Router|*}
- */
+
+
+
+router.post('/addChargingPoint', function (req, res) {
+	console.log('***** add charging point route processing....');
+
+});
+
+router.post('/updateChargingPoint', function (req, res) {
+	console.log('***** update charging point route processing....');
+	var charge = chargePoint();
+	charge.updateChargingPoint(req, res);
+});
+
 router.post('/modifyFieldAttribute', function (req, res) {
 	console.log('***** calling utility method modify field attribute');
 	var attribute = modifyAttribute();
 	attribute.updateAttribute(req, res);
 });
 
-
-/**
- * delete methods
- * @type {core.Router|*}
- */
 router.post('/deleteUser', function (req, res) {
 	console.log('***** delete User route processing....');
 	var activeAuth = auth();

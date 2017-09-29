@@ -18,12 +18,12 @@ module.exports = function () {
 			var action = req.query.action || '';
 
 			if (latitude === '' || longitude === '' || action === '') {
-				res.status(422);
+				/*res.status(422);
 				res.json({
 					"status" : 422,
-					"message": "Missing required parameters"
+					"message": "Missing query parameters"
 				});
-				return;
+				return;*/
 			}
 
 			var payLoad = [];

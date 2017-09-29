@@ -12,6 +12,7 @@ router.post('/register', function (req, res) {
 	var activeAuth = auth();
 	activeAuth.registerUser(req, res);
 });
+
 router.post('/login', function (req, res) {
 	console.log('***** Login route processing....');
 	var activeAuth = auth();

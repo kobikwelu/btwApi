@@ -56,20 +56,31 @@ module.exports = function () {
 			}, {snapshot: true}, function (err, docs) {
 				if (docs) {
 					docs.forEach(function (element) {
-						var latitude = element.latitude;
-						var longitude = element.longitude;
 						mongoDBChargePoints.EV_ChargePoints.update(element,
-							{$set: {"location": [longitude, latitude]}},
+							{
+								$set: {
+									"metadata": {
+										"rating"               : null,
+										"isCheckedIn"          : false,
+										"timeCheckedIn"        : null,
+										"intendedDurationOfUse": null,
+										"comments"             : [],
+										"images"               : []
+									}
+								}
+							},
 							{
 								upsert: true,
 								multi : true
-							}, function (err, docs) {
+							},
+							function (err, docs) {
 								if (docs) {
 									console.log('document updated successfully')
 								} else {
 									console.log('something went wrong because of ' + err);
 								}
-							})
+							}
+						)
 					})
 					res.status(200);
 					res.json({
