@@ -25,12 +25,17 @@ router.get('/getChargingPointBy', function (req, res) {
 	charge.getChargingPointBy(req, res);
 });
 
-router.get('/getChargingPointsMetaData', function (req, res) {
+router.get('/getAllChargingPointsMetaData', function (req, res) {
 	console.log('***** get charging points meta data route processing....');
 	var metaData = chargeMetaData();
 	metaData.getChargingPointsMetaData(req, res)
 });
 
+router.get('/getChargingPointMetaData', function (req, res) {
+	console.log('***** get charging point Meta dat route processing....');
+	var charge = chargePoint();
+	charge.getChargingPointMetaData(req, res)
+});
 
 
 

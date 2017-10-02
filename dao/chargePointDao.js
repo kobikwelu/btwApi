@@ -55,8 +55,7 @@ module.exports = function () {
 				ng_vehicle_class       : 1,
 				station                : 1,
 				posts                  : 1,
-				location               : 1,
-				metadata               : 1
+				location               : 1
 			}, {limit: 300}, function (err, docs) {
 				if (err || typeof docs[0] === 'undefined') {
 					res.status(503);
@@ -110,6 +109,44 @@ module.exports = function () {
 						$near       : [parseFloat(item[0]), parseFloat(item[1])],
 						$maxDistance: 0.0049087385212341975
 					}
+				}, {
+					access_days_time       : 1,
+					cards_accepted         : 1,
+					date_last_confirmed    : 1,
+					expected_date          : 1,
+					fuel_type_code         : 1,
+					id                     : 1,
+					groups_with_access_code: 1,
+					open_date              : 1,
+					owner_type_code        : 1,
+					status_code            : 1,
+					station_name           : 1,
+					station_phone          : 1,
+					updated_at             : 1,
+					geocode_status         : 1,
+					city                   : 1,
+					intersection_directions: 1,
+					plus4                  : 1,
+					state                  : 1,
+					street_address         : 1,
+					zip                    : 1,
+					bd_blends              : 1,
+					e85_blender_pump       : 1,
+					ev_connector_types     : 1,
+					ev_dc_fast_num         : 1,
+					ev_level1_evse_num     : 1,
+					ev_level2_evse_num     : 1,
+					ev_network             : 1,
+					ev_network_web         : 1,
+					ev_other_evse          : 1,
+					hy_status_link         : 1,
+					lpg_primary            : 1,
+					ng_fill_type_code      : 1,
+					ng_psi                 : 1,
+					ng_vehicle_class       : 1,
+					station                : 1,
+					posts                  : 1,
+					location               : 1
 				}, function (err, docs) {
 					if (err) {
 						res.status(503);
@@ -128,23 +165,18 @@ module.exports = function () {
 
 	var updateChargingPoint = function (table, item, res) {
 		if (table === 'chargePoints') {
+			console.log('Starting update charging point query.....');
 			var count = item.length;
+			console.log ('count is ' + count);
 			if (count > 1) {
 				for (x = 1; x < item.length; item++) {
-					console.log ('item is '+ item[x][0] + ' and ' + item[x][1]);
-					if (item[x][0] === 'images'){
+					if (item[x][0] === 'images') {
 						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
 							$set: {
-								"metadata.images": item[x][1]
+								"metadata.5": item[x][1]
 							}
-						}, function(err, doc){
-							if (doc){
-								res.status(200);
-								res.json({
-									"status" : 200,
-									"message": "Update successful"
-								});
-							} else {
+						}, function (err) {
+							if (err) {
 								res.status(503);
 								res.json({
 									"status" : 503,
@@ -152,19 +184,15 @@ module.exports = function () {
 								});
 							}
 						})
-					} else if (item[x][0] === 'rating'){
-						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
+					} else if (item[x][0] === 'rating') {
+						console.log('updating rating.....')
+						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {
 							$set: {
-								"metadata.rating": item[x][1]
+								"metadata.0": item[x][1]
 							}
-						}, function(err, doc){
-							if (doc){
-								res.status(200);
-								res.json({
-									"status" : 200,
-									"message": "Update successful"
-								});
-							} else {
+						},  function (err, docs) {
+							console.log('docs is  + ' + docs[0]);
+							if (err) {
 								res.status(503);
 								res.json({
 									"status" : 503,
@@ -172,20 +200,14 @@ module.exports = function () {
 								});
 							}
 						})
-					} else if (item[x][0] === 'isCheckedIn'){
-						console.log ('in here');
+					} else if (item[x][0] === 'isCheckedIn') {
+						console.log('in here');
 						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
 							$set: {
-								"metadata.isCheckedIn": item[x][1]
+								"metadata.1": item[x][1]
 							}
-						}, function(err, doc){
-							if (doc){
-								res.status(200);
-								res.json({
-									"status" : 200,
-									"message": "Update successful"
-								});
-							} else {
+						}, function (err) {
+							if (err) {
 								res.status(503);
 								res.json({
 									"status" : 503,
@@ -193,19 +215,13 @@ module.exports = function () {
 								});
 							}
 						})
-					} else if (item[x][0] === 'timeCheckedIn'){
+					} else if (item[x][0] === 'timeCheckedIn') {
 						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
 							$set: {
-								"metadata.timeCheckedIn": item[x][1]
+								"metadata.2": item[x][1]
 							}
-						}, function(err, doc){
-							if (doc){
-								res.status(200);
-								res.json({
-									"status" : 200,
-									"message": "Update successful"
-								});
-							} else {
+						}, function (err) {
+							if (err) {
 								res.status(503);
 								res.json({
 									"status" : 503,
@@ -213,19 +229,13 @@ module.exports = function () {
 								});
 							}
 						})
-					} else if (item[x][0 === 'intendedDurationOfUse']){
+					} else if (item[x][0 === 'intendedDurationOfUse']) {
 						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
 							$set: {
-								"metadata.intendedDurationOfUse": item[x][1]
+								"metadata.3": item[x][1]
 							}
-						}, function(err, doc){
-							if (doc){
-								res.status(200);
-								res.json({
-									"status" : 200,
-									"message": "Update successful"
-								});
-							} else {
+						}, function (err) {
+							if (err) {
 								res.status(503);
 								res.json({
 									"status" : 503,
@@ -233,19 +243,13 @@ module.exports = function () {
 								});
 							}
 						})
-					} else if (item[x][0] === 'comments'){
+					} else if (item[x][0] === 'comments') {
 						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
 							$set: {
-								"metadata.comments": item[x][1]
+								"metadata.4": item[x][1]
 							}
-						}, function(err, doc){
-							if (doc){
-								res.status(200);
-								res.json({
-									"status" : 200,
-									"message": "Update successful"
-								});
-							} else {
+						}, function (err) {
+							if (err) {
 								res.status(503);
 								res.json({
 									"status" : 503,
@@ -257,7 +261,28 @@ module.exports = function () {
 				}
 			}
 		}
-	}
+	};
+
+	var getChargingPointMetaData = function (table, item, res) {
+		if (table === 'chargePoints') {
+			console.log('Starting get query for charging points by location.....');
+			mongoDBChargePoints.EV_ChargePoints.ensureIndex({"location": 1});
+			mongoDBChargePoints.EV_ChargePoints.find({"location": [parseFloat(item[0]), parseFloat(item[1])]}, {
+				metadata: 1
+			}, {limit: 1}, function (err, docs) {
+				if (err) {
+					res.status(503);
+					res.json({
+						"status" : 503,
+						"message": "Something went wrong, please try again later"
+					});
+				}
+				else {
+					res.json(docs);
+				}
+			})
+		}
+	};
 
 	return {
 		getAllChargingPoints     : function (table, res) {
@@ -265,16 +290,20 @@ module.exports = function () {
 			getAllChargingPoints(table, res)
 		},
 		getChargingPointsMetaData: function (table, res) {
-			console.log('***** CHARGEPOINTMETADATA DAO .....');
+			console.log('***** CHARGINGPOINTMETADATA DAO .....');
 			getChargingPointsMetaData(table, res)
 		},
 		getAllChargingPointsBy   : function (table, item, res) {
 			console.log('***** CHARGEPOINTSBY DAO .....');
 			getAllChargingPointsBy(table, item, res)
 		},
-		updateChargingPoint      : function (table, res) {
+		updateChargingPoint      : function (table, item, res) {
 			console.log('***** UPDATECHARGEPOINT DAO .....');
-			updateChargingPoint(table, res)
+			updateChargingPoint(table, item, res)
+		},
+		getChargingPointMetaData : function (table, item, res) {
+			console.log('***** CHARGEPOINTMETADATA DAO .....');
+			getChargingPointMetaData(table, item, res)
 		}
 	}
 }

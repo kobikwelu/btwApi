@@ -8,7 +8,7 @@ var localHost = superTest('http://localhost:4252');
 
 describe('ChargePointMetaData based tests  ----- ', function () {
 
-	it('successful retrieval - expect a 200 response', function (done) {
+	it('/api/v1/getAllChargingPointsMetaData - successful retrieval - expect a 200 response', function (done) {
 		localHost.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
@@ -16,7 +16,7 @@ describe('ChargePointMetaData based tests  ----- ', function () {
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getChargingPointsMetaData')
+				localHost.get('/api/v1/getAllChargingPointsMetaData')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
