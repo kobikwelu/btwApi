@@ -2,6 +2,8 @@
  * Created by kennethobikwelu on 8/1/17.
  */
 
+'use strict';
+
 var mongoJs = require('mongojs');
 var mongo = require('../config');
 var port = 15214;
@@ -167,98 +169,114 @@ module.exports = function () {
 		if (table === 'chargePoints') {
 			console.log('Starting update charging point query.....');
 			var count = item.length;
-			console.log ('count is ' + count);
-			if (count > 1) {
-				for (x = 1; x < item.length; item++) {
-					if (item[x][0] === 'images') {
-						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
-							$set: {
-								"metadata.5": item[x][1]
-							}
-						}, function (err) {
-							if (err) {
-								res.status(503);
-								res.json({
-									"status" : 503,
-									"message": "Something went wrong, please try again later "
-								});
-							}
-						})
-					} else if (item[x][0] === 'rating') {
-						console.log('updating rating.....')
-						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {
-							$set: {
-								"metadata.0": item[x][1]
-							}
-						},  function (err, docs) {
-							console.log('docs is  + ' + docs[0]);
-							if (err) {
-								res.status(503);
-								res.json({
-									"status" : 503,
-									"message": "Something went wrong, please try again later "
-								});
-							}
-						})
-					} else if (item[x][0] === 'isCheckedIn') {
-						console.log('in here');
-						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
-							$set: {
-								"metadata.1": item[x][1]
-							}
-						}, function (err) {
-							if (err) {
-								res.status(503);
-								res.json({
-									"status" : 503,
-									"message": "Something went wrong, please try again later "
-								});
-							}
-						})
-					} else if (item[x][0] === 'timeCheckedIn') {
-						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
-							$set: {
-								"metadata.2": item[x][1]
-							}
-						}, function (err) {
-							if (err) {
-								res.status(503);
-								res.json({
-									"status" : 503,
-									"message": "Something went wrong, please try again later "
-								});
-							}
-						})
-					} else if (item[x][0 === 'intendedDurationOfUse']) {
-						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
-							$set: {
-								"metadata.3": item[x][1]
-							}
-						}, function (err) {
-							if (err) {
-								res.status(503);
-								res.json({
-									"status" : 503,
-									"message": "Something went wrong, please try again later "
-								});
-							}
-						})
-					} else if (item[x][0] === 'comments') {
-						mongoDBCPTest.EV_CPTest.update({"location": item[0]}, {}, {
-							$set: {
-								"metadata.4": item[x][1]
-							}
-						}, function (err) {
-							if (err) {
-								res.status(503);
-								res.json({
-									"status" : 503,
-									"message": "Something went wrong, please try again later "
-								});
-							}
-						})
-					}
+			if (count > 2) {
+				if (item[2] === null){
+					//do nothing
+				} else {
+					mongoDBChargePoints.EV_ChargePoints.update({"location": [parseFloat(item[0]), parseFloat(item[1])]}, {
+						$push: {
+							"comments": [new Date().toLocaleString(), item[2][1]]
+						}
+					}, function(err){
+						if (err) {
+							res.status(503);
+							res.json({
+								"status" : 503,
+								"message": "Something went wrong, please try again later "
+							});
+						}
+					})
 				}
+				if (item[3] === null){
+					//do nothing
+				} else {
+					mongoDBChargePoints.EV_ChargePoints.update({"location": [parseFloat(item[0]), parseFloat(item[1])]}, {
+						$push: {
+							"images": [item[3][1]]
+						}
+					}, function(err){
+						if (err) {
+							res.status(503);
+							res.json({
+								"status" : 503,
+								"message": "Something went wrong, please try again later "
+							});
+						}
+					})
+				}
+				if (item[4] === null){
+					//do nothing
+				} else {
+					mongoDBChargePoints.EV_ChargePoints.update({"location": [parseFloat(item[0]), parseFloat(item[1])]}, {
+						$set: {
+							"rating": item[4][1]
+						}
+					}, function(err){
+						if (err) {
+							res.status(503);
+							res.json({
+								"status" : 503,
+								"message": "Something went wrong, please try again later "
+							});
+						}
+					})
+				}
+				if (item[5] === null){
+					//do nothing
+				} else {
+					mongoDBChargePoints.EV_ChargePoints.update({"location": [parseFloat(item[0]), parseFloat(item[1])]}, {
+						$set: {
+							"isCheckedIn": item[5][1]
+						}
+					}, function(err){
+						if (err) {
+							res.status(503);
+							res.json({
+								"status" : 503,
+								"message": "Something went wrong, please try again later "
+							});
+						}
+					})
+				}
+				if (item[6] === null){
+					//do nothing
+				} else {
+					mongoDBChargePoints.EV_ChargePoints.update({"location": [parseFloat(item[0]), parseFloat(item[1])]}, {
+						$set: {
+							"timeCheckedIn": item[6][1]
+						}
+					}, function(err){
+						if (err) {
+							res.status(503);
+							res.json({
+								"status" : 503,
+								"message": "Something went wrong, please try again later "
+							});
+						}
+					})
+				}
+				if (item[7] === null){
+					//do nothing
+				} else {
+					mongoDBChargePoints.EV_ChargePoints.update({"location": [parseFloat(item[0]), parseFloat(item[1])]}, {
+						$set: {
+							"intendedDurationOfUse": item[7][1]
+						}
+					}, function(err){
+						if (err) {
+							res.status(503);
+							res.json({
+								"status" : 503,
+								"message": "Something went wrong, please try again later "
+							});
+						}
+					})
+				}
+				res.status(200);
+				res.json({
+					"status" : 200,
+					"message": "Update successful "
+				});
 			}
 		}
 	};
@@ -268,7 +286,12 @@ module.exports = function () {
 			console.log('Starting get query for charging points by location.....');
 			mongoDBChargePoints.EV_ChargePoints.ensureIndex({"location": 1});
 			mongoDBChargePoints.EV_ChargePoints.find({"location": [parseFloat(item[0]), parseFloat(item[1])]}, {
-				metadata: 1
+				rating               : 1,
+				isCheckedIn          : 1,
+				timeCheckedIn        : 1,
+				intendedDurationOfUse: 1,
+				comments             : 1,
+				images               : 1
 			}, {limit: 1}, function (err, docs) {
 				if (err) {
 					res.status(503);

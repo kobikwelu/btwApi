@@ -39,9 +39,9 @@ router.get('/getChargingPointMetaData', function (req, res) {
 
 
 
-router.post('/addChargingPoint', function (req, res) {
+router.post('/registerChargingPoint', function (req, res) {
 	console.log('***** add charging point route processing....');
-
+	var charge = chargePoint();
 });
 
 router.post('/updateChargingPoint', function (req, res) {

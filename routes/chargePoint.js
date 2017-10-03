@@ -39,7 +39,8 @@ module.exports = function () {
         updateChargingPoint: function (req, res) {
             console.log('***** update Charging point processing....');
 
-            var location = [req.body.longitude, req.body.latitude];
+            var longitude = req.body.longitude;
+            var latitude = req.body.latitude;
             var comments = req.body.comments;
             var images  = req.body.images;
             var rating = req.body.rating;
@@ -49,7 +50,7 @@ module.exports = function () {
             var payLoad = [];
 
 
-           if (req.body.longitude === '' || req.body.latitude === ''){
+           if (typeof longitude === 'undefined' || typeof latitude === 'undefined'){
                res.status(422);
                res.json({
                    "status": 422,
@@ -58,41 +59,42 @@ module.exports = function () {
                return;
            }
 
-            payLoad.push(location);
+            payLoad.push(longitude);
+            payLoad.push(latitude);
 
-            //comments
+            //comments 2
             if (typeof comments === 'undefined'){
-                //do nothing
+                payLoad.push(null);
             }else {
                 payLoad.push(['comments', comments])
             }
-            //images
+            //images 3
             if (typeof images === 'undefined'){
-                //do nothing
+                payLoad.push(null);
             }else {
                 payLoad.push(['images', images])
             }
-            //rating
+            //rating 4
             if (typeof rating === 'undefined'){
-                //do nothing
+                payLoad.push(null);
             }else {
                 payLoad.push(['rating', rating])
             }
-            //IsCheckedIn
+            //IsCheckedIn 5
             if (typeof isCheckedIn === 'undefined'){
-                //do nothing
+                payLoad.push(null);
             }else {
                 payLoad.push(['isCheckedIn', isCheckedIn])
             }
-            //timeCheckedIn
+            //timeCheckedIn 6
             if (typeof timeCheckedIn === 'undefined'){
-                //do nothing
+                payLoad.push(null);
             }else {
                 payLoad.push(['timeCheckedIn', timeCheckedIn])
             }
-            //intendedDurationOfUse
+            //intendedDurationOfUse 7
             if (typeof intendedDurationOfUse === 'undefined'){
-                //do nothing
+                payLoad.push(null);
             }else {
                 payLoad.push(['intendedDurationOfUse', intendedDurationOfUse])
             }

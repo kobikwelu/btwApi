@@ -52,7 +52,13 @@ module.exports = function () {
 				ng_psi                 : 1,
 				ng_vehicle_class       : 1,
 				station                : 1,
-				posts                  : 1
+				posts                  : 1,
+				rating                 : 1,
+				isCheckedIn            : 1,
+				timeCheckedIn          : 1,
+				intendedDurationOfUse  : 1,
+				comments               : 1,
+				images                 : 1
 			}, {snapshot: true}, function (err, docs) {
 				if (docs) {
 					docs.forEach(function (element) {
