@@ -8,6 +8,7 @@ var router = express.Router();
 var chargePoint = require('../../chargePoint.js');
 var chargeMetaData = require('../../chargeMetaData.js');
 var modifyAttribute = require('../../modifyAttribute.js');
+var auth = require('../../auth.js');
 
 
 /*
@@ -44,7 +45,7 @@ router.post('/registerChargingPoint', function (req, res) {
 	var charge = chargePoint();
 });
 
-router.post('/updateChargingPoint', function (req, res) {
+router.put('/updateChargingPoint', function (req, res) {
 	console.log('***** update charging point route processing....');
 	var charge = chargePoint();
 	charge.updateChargingPoint(req, res);
@@ -60,6 +61,12 @@ router.post('/deleteUser', function (req, res) {
 	console.log('***** delete User route processing....');
 	var activeAuth = auth();
 	activeAuth.deleteUser(req, res);
+});
+
+router.put('/modifyUser', function (req, res) {
+	console.log('***** modify User route processing....');
+	var activeAuth = auth();
+	activeAuth.modifyUser(req, res);
 });
 
 

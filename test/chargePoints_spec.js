@@ -78,7 +78,7 @@ describe('ChargePoints based tests  ----- ', function () {
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.post('/api/v1/updateChargingPoint')
+				localHost.put('/api/v1/updateChargingPoint')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -208,7 +208,7 @@ describe('ChargePoints based tests  ----- ', function () {
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.post('/api/v1/updateChargingPoint')
+				localHost.put('/api/v1/updateChargingPoint')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')

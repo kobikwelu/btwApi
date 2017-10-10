@@ -10,6 +10,7 @@ var mongoJs = require('mongojs');
 var mongo = require('../config');
 var port = 15214;
 var mongoDBChargePointUser = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.keys.mongo_password + '@ds115214.mlab.com:' + port + '/evpoint', [mongo.keys.mongo_collection_user]);
+var mongoDBCPTest = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.keys.mongo_password + '@ds115214.mlab.com:' + port + '/evpoint', [mongo.keys.mongo_collection_test]);
 
 
 module.exports = function () {
@@ -18,14 +19,14 @@ module.exports = function () {
 		console.log('getToken starts....');
 		var expires = expiresIn(0.0098);
 		var token = jwt.encode({
-			exp: expires,
+			exp : expires,
 			role: role
 		}, require('../config/secret')());
 
 		return {
 			token  : token,
 			expires: expires,
-			role: role
+			role   : role
 		};
 	}
 
@@ -211,13 +212,56 @@ module.exports = function () {
 		})
 	}
 
+	//modify to use for a test account
+	var modifyUser = function (item, table, res) {
+		mongoDBChargePointUser.EV_User.find({"user.email": item[1], "user.username": item[0]}, function (err, docs) {
+			if (typeof docs[0] === 'undefined') {
+				res.status(403);
+				res.json({
+					"status" : 403,
+					"message": "Not authorized to perform this action"
+				});
+			} else {
+				mongoDBChargePointUser.EV_User.update({"user.email": item[1]},
+					{
+						$set: {
+								"user.address"    : item[2],
+								"user.dateOfBirth": item[3],
+								"user.carModel"   : item[4],
+								"user.thumbnail"  : item[5],
+								"user.gender"     : item[6]
+						}
+					}, {
+						upsert: false,
+						multi : false
+					}, function (err, doc) {
+						if (err) {
+							res.status(500);
+							res.json({
+								"status" : 500,
+								"message": "Internal Server Error"
+							});
+						} else {
+							res.status(200);
+							res.json({
+								"status" : 200,
+								"message": "Update successful"
+							});
+						}
+
+					})
+			}
+		})
+	}
+
+
 	return {
 		createAccount   : function (item, table, res) {
-			console.log('***** USERDAO createAccount.....');
+			console.log('***** USERDAO createAccount processing.....');
 			createUser(item, table, res)
 		},
 		authenticateUser: function (item, table, req, res) {
-			console.log('***** USERDAO authenticate User processing ...');
+			console.log('***** USERDAO authenticate processing ...');
 			validateUser(item, table, req, res)
 		},
 		getRole         : function (item, req, res, next) {
@@ -227,6 +271,11 @@ module.exports = function () {
 		deleteAccount   : function (item, table, res) {
 			console.log('***** USERDAO deleteAccount.....');
 			deleteUser(item, table, res)
+		},
+		modifyUser      : function (item, table, res) {
+			console.log('***** USERDAO modifyUser processing .....');
+			modifyUser(item, table, res)
 		}
+
 	}
 }
