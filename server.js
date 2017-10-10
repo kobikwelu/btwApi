@@ -2,6 +2,7 @@
  * Created by kennethobikwelu on 8/11/17.
  */
 
+require('newrelic');
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
