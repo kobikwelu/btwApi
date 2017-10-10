@@ -15,18 +15,18 @@ var mongoDBCPTest = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.k
 
 module.exports = function () {
 
-	function genToken(role) {
+	function genToken(role, username) {
 		console.log('getToken starts....');
 		var expires = expiresIn(0.0098);
 		var token = jwt.encode({
+			issuer: 'http://ev-client.herokuapp.com',
 			exp : expires,
-			role: role
+			role: role,
+			username: username
 		}, require('../config/secret')());
-
 		return {
 			token  : token,
-			expires: expires,
-			role   : role
+			expires: expires
 		};
 	}
 
@@ -65,7 +65,7 @@ module.exports = function () {
 							bcrypt.compare(item[1], docs[0]['user']['password'], function (err, doesMatch) {
 								if (doesMatch) {
 									console.log('success!! issuing token..');
-									res.json(genToken(docs[0]['user']['role']));
+									res.json(genToken(docs[0]['user']['role'], docs[0]['user']['username']));
 								} else {
 									res.status(401);
 									res.json({
