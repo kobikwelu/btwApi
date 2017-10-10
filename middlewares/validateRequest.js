@@ -27,7 +27,7 @@ module.exports = function (req, res, next) {
 			} else {
 				console.log('token is still valid. Proceeding to next check');
 				//remove this fix when the time is right - This is dev's access to the server
-				if (decoded.issuer === origin || decoded.issuer === 'http://localhost:8100/') {
+				if (decoded.issuer === origin || origin === 'http://localhost:8100') {
 					console.log('request coming from a trusted issuer');
 					if (decoded.username === key){
 						console.log('token user and username matches');
