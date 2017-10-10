@@ -6,7 +6,6 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var validator = require('express-validator');
 
 
 var app = express();
@@ -20,7 +19,6 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
-app.use(validator());
 app.use(bodyParser.json());
 var RateLimit = require('express-rate-limit');
 
