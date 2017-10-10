@@ -17,7 +17,7 @@ describe('Api header based tests  ----- ', function () {
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.end(function (err, res) {
 				expect(res.status).to.equal(401);
-				expect(res.body.message).to.equal('Missing token or Key');
+				expect(res.body.message).to.equal('Missing required header parameters - one of these (Token, Key, Origin)');
 				done();
 			})
 	})
@@ -38,7 +38,7 @@ describe('Api header based tests  ----- ', function () {
 					.set('Origin', 'http://ev-client.herokuapp.com')
 					.end(function (err, res) {
 						expect(res.status).to.equal(401);
-						expect(res.body.message).to.equal('Missing token or Key');
+						expect(res.body.message).to.equal('Missing required header parameters - one of these (Token, Key, Origin)');
 						done();
 					})
 			})

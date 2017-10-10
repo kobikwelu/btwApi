@@ -14,7 +14,7 @@ module.exports = function (req, res, next) {
 	var origin = req.get('origin');
 
 	console.log('Checking token/key....');
-	if (token && key) {
+	if (token && key && origin) {
 		try {
 			var decoded = jwt.decode(token, require('../config/secret.js')());
 			if (decoded.exp <= Date.now()) {
@@ -25,9 +25,9 @@ module.exports = function (req, res, next) {
 					"message": "Token Expired. Please generate a new Token"
 				});
 			} else {
-				console.log('token is still valid. Proceeding to secured resource');
+				console.log('token is still valid. Proceeding to next check');
 				//remove this fix when the time is right - This is dev's access to the server
-				if (decoded.issuer === origin || decoded.issuer === 'http://localhost:8100') {
+				if (decoded.issuer === origin || decoded.issuer === 'http://localhost:8100/') {
 					console.log('request coming from a trusted issuer');
 					if (decoded.username === key){
 						console.log('token user and username matches');
@@ -64,7 +64,7 @@ module.exports = function (req, res, next) {
 		res.status(401);
 		res.json({
 			"status" : 401,
-			"message": "Missing token or Key"
+			"message": "Missing required header parameters - one of these (Token, Key, Origin)"
 		});
 	}
 };
