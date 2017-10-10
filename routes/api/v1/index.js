@@ -63,7 +63,7 @@ router.post('/deleteUser', function (req, res) {
 	activeAuth.deleteUser(req, res);
 });
 
-router.put('/modifyUser', function (req, res) {
+router.put('/UpdateUser', function (req, res) {
 	console.log('***** modify User route processing....');
 	var activeAuth = auth();
 	activeAuth.modifyUser(req, res);

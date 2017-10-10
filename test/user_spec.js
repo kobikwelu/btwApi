@@ -10,7 +10,7 @@ var localHost = superTest('http://localhost:4252');
 
 describe('user based tests  ----- ', function () {
 
-	it('/api/v1/modifyUser - successful update expect 200 response', function (done) {
+	it('/api/v1/updateUser - successful update expect 200 response', function (done) {
 		localHost.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
@@ -39,7 +39,7 @@ describe('user based tests  ----- ', function () {
 			})
 	})
 
-	it('/api/v1/modifyUser - failed update - incorrect email', function (done) {
+	it('/api/v1/updateUser - failed update - incorrect email', function (done) {
 		localHost.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
@@ -68,7 +68,7 @@ describe('user based tests  ----- ', function () {
 			})
 	})
 
-	it('/api/v1/modifyUser - failed update - incorrect username', function (done) {
+	it('/api/v1/updateUser - failed update - incorrect username', function (done) {
 		localHost.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
