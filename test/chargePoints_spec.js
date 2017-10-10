@@ -21,6 +21,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.end(function (err, res) {
 						expect(res.status).to.equal(200);
 						expect(res.body).to.not.equal('null');
@@ -41,6 +42,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.end(function (err, res) {
 						expect(res.status).to.equal(200);
 						expect(res.body).to.not.equal('null');
@@ -61,6 +63,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.query({"longitude": -118.3518, "latitude": 34.1406014})
 					.end(function (err, res) {
 						expect(res.status).to.equal(200);
@@ -82,6 +85,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.send({
 						"longitude": -122.145814,
 						"latitude" : 37.416612
@@ -106,6 +110,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.query({"longitude": -121.5167284, "latitude": 38.6160825})
 					.end(function (err, res) {
 						expect(res.status).to.equal(200);
@@ -128,6 +133,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.query({"longitude": 'rrrr', "latitude": 38.6160825})
 					.end(function (err, res) {
 						expect(res.status).to.equal(200);
@@ -149,6 +155,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.query({"longitude": '', "latitude": 38.6160825})
 					.end(function (err, res) {
 						expect(res.status).to.equal(422);
@@ -170,6 +177,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.query({"longitude": 'yyyy', "latitude": 38.6160825})
 					.end(function (err, res) {
 						expect(res.status).to.equal(422);
@@ -191,6 +199,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.query({"longitude": '', "latitude": 38.6160825})
 					.end(function (err, res) {
 						expect(res.status).to.equal(422);
@@ -212,6 +221,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.send({})
 					.end(function (err, res) {
 						expect(res.status).to.equal(422);

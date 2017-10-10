@@ -11,6 +11,7 @@ module.exports = function (req, res, next) {
 	console.log('********Validating request....');
 	var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
 	var key = (req.body && req.body.x_key) || (req.query && req.query.x_key) || req.headers['x-key'];
+	var origin = req.get('origin');
 
 	console.log('Checking token/key....');
 	if (token && key) {
@@ -25,7 +26,7 @@ module.exports = function (req, res, next) {
 				});
 			} else {
 				console.log('token is still valid. Proceeding to secured resource');
-				if (decoded.issuer === 'http://ev-client.herokuapp.com') {
+				if (decoded.issuer === origin) {
 					console.log('request coming from a trusted issuer');
 					if (decoded.username === key){
 						console.log('token user and username matches');
@@ -46,7 +47,7 @@ module.exports = function (req, res, next) {
 					res.status(403);
 					res.json({
 						"status" : 403,
-						"message": "Request is coming from a different domain"
+						"message": "Request is coming from an unidentified domain"
 					});
 				}
 			}

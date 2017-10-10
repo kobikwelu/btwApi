@@ -22,6 +22,7 @@ describe('user based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.send({
 						"username"   : "testUser",
 						"email"      : "testuser@yahoo.com",
@@ -51,6 +52,7 @@ describe('user based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.send({
 						"username"   : "testUser",
 						"email"      : "bad@email.com",
@@ -80,6 +82,7 @@ describe('user based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.send({
 						"username"   : "badUser",
 						"email"      : "test@test.com",

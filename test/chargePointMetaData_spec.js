@@ -20,6 +20,7 @@ describe('ChargePointMetaData based tests  ----- ', function () {
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
+					.set('Origin', 'http://ev-client.herokuapp.com')
 					.end(function (err, res) {
 						expect(res.status).to.equal(200);
 						expect(res.body).to.not.equal('null');

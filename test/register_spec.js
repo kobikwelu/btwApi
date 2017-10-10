@@ -13,6 +13,7 @@ describe('Registration based tests  ----- ', function () {
 	it('failed registration - email exists with all matching fields', function (done) {
 		localHost.post('/user/register')
 			.set('Content-Type', 'application/json')
+			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
 				"username" : "kobikwelu",
 				"password" : "Aa5233713!",
@@ -30,6 +31,7 @@ describe('Registration based tests  ----- ', function () {
 	it('failed registration - email exists with non-matching fields', function (done) {
 		localHost.post('/user/register')
 			.set('Content-Type', 'application/json')
+			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
 				"username" : "newUser",
 				"password" : "Aa5233713!",
@@ -47,6 +49,7 @@ describe('Registration based tests  ----- ', function () {
 	it('failed registration - email (required) attribute value is missing', function (done) {
 		localHost.post('/user/register')
 			.set('Content-Type', 'application/json')
+			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
 				"username" : "newUser",
 				"password" : "Aa5233713!",
@@ -64,6 +67,7 @@ describe('Registration based tests  ----- ', function () {
 	it('failed registration - email (required) attribute is missing', function (done) {
 		localHost.post('/user/register')
 			.set('Content-Type', 'application/json')
+			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
 				"username" : "newUser",
 				"password" : "Aa5233713!",
@@ -80,6 +84,7 @@ describe('Registration based tests  ----- ', function () {
 	it('failed registration - role (required) attribute is missing', function (done) {
 		localHost.post('/user/register')
 			.set('Content-Type', 'application/json')
+			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
 				"username" : "newUser",
 				"password" : "Aa5233713!",
@@ -96,6 +101,7 @@ describe('Registration based tests  ----- ', function () {
 	it('failed registration - username (required) attribute is missing', function (done) {
 		localHost.post('/user/register')
 			.set('Content-Type', 'application/json')
+			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
 				"password" : "Aa5233713!",
 				"email"	: "kobikwelu@yahoo.com",
@@ -112,6 +118,7 @@ describe('Registration based tests  ----- ', function () {
 	it('failed registration - password (required) attribute is missing', function (done) {
 		localHost.post('/user/register')
 			.set('Content-Type', 'application/json')
+			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
 				"username" : "newUser",
 				"email"	: "kobikwelu@yahoo.com",
