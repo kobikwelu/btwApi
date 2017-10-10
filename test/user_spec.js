@@ -18,7 +18,7 @@ describe('user based tests  ----- ', function () {
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.put('/api/v1/modifyUser')
+				localHost.put('/api/v1/updateUser')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')
@@ -47,7 +47,7 @@ describe('user based tests  ----- ', function () {
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.put('/api/v1/modifyUser')
+				localHost.put('/api/v1/updateUser')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')
@@ -76,7 +76,7 @@ describe('user based tests  ----- ', function () {
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.put('/api/v1/modifyUser')
+				localHost.put('/api/v1/updateUser')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')
