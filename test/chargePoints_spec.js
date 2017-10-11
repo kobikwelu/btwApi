@@ -136,7 +136,7 @@ describe('ChargePoints based tests  ----- ', function () {
 					.set('Origin', 'http://ev-client.herokuapp.com')
 					.query({"longitude": 'rrrr', "latitude": 38.6160825})
 					.end(function (err, res) {
-						expect(res.status).to.equal(200);
+						expect(res.status).to.equal(422);
 						expect(res.body).to.not.equal('null');
 						done();
 					})
