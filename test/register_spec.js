@@ -4,7 +4,7 @@
 
 var expect = require('chai').expect;
 var superTest = require('supertest');
-var host = superTest('http://localhost:4252' || 'https://staging-evpoint.herokuapp.com/');
+var host = superTest('https://staging-evpoint.herokuapp.com/');
 
 
 describe('Registration based tests  ----- ', function () {
