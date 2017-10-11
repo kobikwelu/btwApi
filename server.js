@@ -4,7 +4,6 @@
 
 require('newrelic');
 var express = require('express');
-var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
@@ -36,7 +35,6 @@ var limiter = new RateLimit({
 app.use(limiter);
 
 app.all('/*', function (req, res, next) {
-	console.log('*********1');
 	// CORS headers
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -46,7 +44,6 @@ app.all('/*', function (req, res, next) {
 		res.status(200).end();
 	} else {
 		console.log('req.body: ' + JSON.stringify(req.body));
-		console.log('*********2');
 		next();
 	}
 });

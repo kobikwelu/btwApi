@@ -12,8 +12,6 @@ module.exports = function () {
 	var updateAttribute = function (item, table, res) {
 		if (table === 'test') {
 			console.log('Starting modify action.....');
-			//forEach( function (x) { x.photos = [{"uri": "/images/" + x.photos}]; db.members.save(x); });
-			//create dummy collection in DB to test
 			mongoDBChargePoints.EV_ChargePoints.find({}, {
 				access_days_time       : 1,
 				cards_accepted         : 1,
