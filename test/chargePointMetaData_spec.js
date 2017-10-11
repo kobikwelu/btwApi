@@ -9,7 +9,7 @@ var host = superTest('https://staging-evpoint.herokuapp.com');
 describe('ChargePointMetaData based tests  ----- ', function () {
 
 	it('/api/v1/getAllChargingPointsMetaData - successful retrieval - expect a 200 response', function (done) {
-		host.post('/user/login')
+		host.post('user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
