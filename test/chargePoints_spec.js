@@ -5,19 +5,19 @@
 
 var expect = require('chai').expect;
 var superTest = require('supertest');
-var localHost = superTest('http://localhost:4252');
+var host = superTest('http://localhost:4252' || 'https://staging-evpoint.herokuapp.com/');
 
 describe('ChargePoints based tests  ----- ', function () {
 
 	it('/api/v1/getAllChargingPoints - successful retrieval - expect a 200 response', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getAllChargingPoints')
+				host.get('/api/v1/getAllChargingPoints')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -31,14 +31,14 @@ describe('ChargePoints based tests  ----- ', function () {
 	})
 
 	it('/api/v1/getAllChargingPointsMetaData - successful retrieval - expect a 200 response', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getAllChargingPointsMetaData')
+				host.get('/api/v1/getAllChargingPointsMetaData')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -52,14 +52,14 @@ describe('ChargePoints based tests  ----- ', function () {
 	})
 
 	it('/api/v1/getChargingPointMetaData - successful retrieval - expect a 200 response', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getChargingPointMetaData')
+				host.get('/api/v1/getChargingPointMetaData')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -74,14 +74,14 @@ describe('ChargePoints based tests  ----- ', function () {
 	})
 
 	it('/api/v1/updateChargingPoint - successful update - expect a 200 response', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.put('/api/v1/updateChargingPoint')
+				host.put('/api/v1/updateChargingPoint')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -99,14 +99,14 @@ describe('ChargePoints based tests  ----- ', function () {
 	})
 
 	it('/api/v1/getChargingPointBy - successful retrieval - expect a 200 response', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getChargingPointBy')
+				host.get('/api/v1/getChargingPointBy')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -122,14 +122,14 @@ describe('ChargePoints based tests  ----- ', function () {
 
 
 	it('/api/v1/getChargingPointBy - it failed - Non numeric co-ordinates', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getChargingPointBy')
+				host.get('/api/v1/getChargingPointBy')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -144,14 +144,14 @@ describe('ChargePoints based tests  ----- ', function () {
 	})
 
 	it('/api/v1/getChargingPointBy - it failed - missing coordinate parameters', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getChargingPointBy')
+				host.get('/api/v1/getChargingPointBy')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -166,14 +166,14 @@ describe('ChargePoints based tests  ----- ', function () {
 	})
 
 	it('/api/v1/getChargingPointMetaData - it failed - Non numeric co-ordinates', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getChargingPointMetaData')
+				host.get('/api/v1/getChargingPointMetaData')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -188,14 +188,14 @@ describe('ChargePoints based tests  ----- ', function () {
 	})
 
 	it('/api/v1/getChargingPointMetaData - it failed - missing coordinate parameters', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getChargingPointMetaData')
+				host.get('/api/v1/getChargingPointMetaData')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')
@@ -210,14 +210,14 @@ describe('ChargePoints based tests  ----- ', function () {
 	})
 
 	it('/api/v1/updateChargingPoint - failed retrieval - expect a 422 response', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.put('/api/v1/updateChargingPoint')
+				host.put('/api/v1/updateChargingPoint')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'kobikwelu')

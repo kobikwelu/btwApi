@@ -5,13 +5,13 @@
 
 var expect = require('chai').expect;
 var superTest = require('supertest');
-var localHost = superTest('http://localhost:4252');
+var host = superTest('http://localhost:4252' || 'https://staging-evpoint.herokuapp.com/');
 
 
 describe('Login based tests  ----- ', function () {
 
 	it('successful login - expect a 200 response', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -29,7 +29,7 @@ describe('Login based tests  ----- ', function () {
 	})
 
 	it('failed login - expect a 401 response - username value is missing', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -45,7 +45,7 @@ describe('Login based tests  ----- ', function () {
 	})
 
 	it('failed login - expect a 401 response - password value is missing', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -61,7 +61,7 @@ describe('Login based tests  ----- ', function () {
 	})
 
 	it('failed login - expect a 401 response - wrong username _ password combination', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -77,7 +77,7 @@ describe('Login based tests  ----- ', function () {
 	})
 
 	it('failed login - expect a 401 response - missing username attribute', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -92,7 +92,7 @@ describe('Login based tests  ----- ', function () {
 	})
 
 	it('failed login - expect a 401 response - missing password attribute', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -107,7 +107,7 @@ describe('Login based tests  ----- ', function () {
 	})
 
 	it('failed login - expect a 401 response - missing both attributes', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({

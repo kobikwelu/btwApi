@@ -5,12 +5,12 @@
 
 var expect = require('chai').expect;
 var superTest = require('supertest');
-var localHost = superTest('http://localhost:4252');
+var host = superTest('http://localhost:4252' || 'https://staging-evpoint.herokuapp.com/');
 
 
 describe('Api header based tests  ----- ', function () {
 	it('/api/v1/getAllChargingPoints - failed retrieval - missing required parameter attribute - X-token', function (done) {
-		localHost.get('/api/v1/getAllChargingPoints')
+		host.get('/api/v1/getAllChargingPoints')
 			.set('Content-Type', 'application/json')
 			.set('x-access-token', '')
 			.set('x-key', 'kobikwelu')
@@ -24,14 +24,14 @@ describe('Api header based tests  ----- ', function () {
 
 
 	it('failed retrieval - missing required parameter attribute - X-key', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getAllChargingPoints')
+				host.get('/api/v1/getAllChargingPoints')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', '')
@@ -46,7 +46,7 @@ describe('Api header based tests  ----- ', function () {
 
 
 	it('failed retrieval - expired X-token', function (done) {
-		localHost.get('/api/v1/getAllChargingPoints')
+		host.get('/api/v1/getAllChargingPoints')
 			.set('Content-Type', 'application/json')
 			.set('x-access-token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDU1MTgzODc1ODMsInJvbGUiOiJhZG1pbiJ9.4m8lUzRAASYFqKan3iQCyg79CGomCnF1XSyqrUZuskw')
 			.set('x-key', 'kobikwelu')
@@ -60,14 +60,14 @@ describe('Api header based tests  ----- ', function () {
 	})
 
 	it('failed retrieval - valid X-token, but invalid x-key', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getAllChargingPoints')
+				host.get('/api/v1/getAllChargingPoints')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'wrongKey')
@@ -82,14 +82,14 @@ describe('Api header based tests  ----- ', function () {
 	})
 
 	it('failed retrieval - using different token for another user', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "kobikwelu",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.get('/api/v1/getAllChargingPoints')
+				host.get('/api/v1/getAllChargingPoints')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')

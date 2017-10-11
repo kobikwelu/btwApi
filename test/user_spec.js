@@ -5,20 +5,20 @@
 
 var expect = require('chai').expect;
 var superTest = require('supertest');
-var localHost = superTest('http://localhost:4252');
+var host = superTest('http://localhost:4252' || 'https://staging-evpoint.herokuapp.com/');
 
 
 describe('user based tests  ----- ', function () {
 
 	it('/api/v1/updateUser - successful update expect 200 response', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "testUser",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.put('/api/v1/updateUser')
+				host.put('/api/v1/updateUser')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')
@@ -41,14 +41,14 @@ describe('user based tests  ----- ', function () {
 	})
 
 	it('/api/v1/updateUser - failed update - incorrect email', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "testUser",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.put('/api/v1/updateUser')
+				host.put('/api/v1/updateUser')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')
@@ -71,14 +71,14 @@ describe('user based tests  ----- ', function () {
 	})
 
 	it('/api/v1/updateUser - failed update - incorrect username', function (done) {
-		localHost.post('/user/login')
+		host.post('/user/login')
 			.set('Content-Type', 'application/json')
 			.send({
 				"username": "testUser",
 				"password": "Aa5233713!"
 			})
 			.end(function (err, res) {
-				localHost.put('/api/v1/updateUser')
+				host.put('/api/v1/updateUser')
 					.set('Content-Type', 'application/json')
 					.set('x-access-token', res.body.token)
 					.set('x-key', 'testUser')

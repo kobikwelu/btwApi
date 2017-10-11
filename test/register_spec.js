@@ -4,14 +4,14 @@
 
 var expect = require('chai').expect;
 var superTest = require('supertest');
-var localHost = superTest('http://localhost:4252');
+var host = superTest('http://localhost:4252' || 'https://staging-evpoint.herokuapp.com/');
 
 
 describe('Registration based tests  ----- ', function () {
 
 
 	it('failed registration - email exists with all matching fields', function (done) {
-		localHost.post('/user/register')
+		host.post('/user/register')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -29,7 +29,7 @@ describe('Registration based tests  ----- ', function () {
 	})
 
 	it('failed registration - email exists with non-matching fields', function (done) {
-		localHost.post('/user/register')
+		host.post('/user/register')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -47,7 +47,7 @@ describe('Registration based tests  ----- ', function () {
 	})
 
 	it('failed registration - email (required) attribute value is missing', function (done) {
-		localHost.post('/user/register')
+		host.post('/user/register')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -65,7 +65,7 @@ describe('Registration based tests  ----- ', function () {
 	})
 
 	it('failed registration - email (required) attribute is missing', function (done) {
-		localHost.post('/user/register')
+		host.post('/user/register')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -82,7 +82,7 @@ describe('Registration based tests  ----- ', function () {
 	})
 
 	it('failed registration - role (required) attribute is missing', function (done) {
-		localHost.post('/user/register')
+		host.post('/user/register')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -99,7 +99,7 @@ describe('Registration based tests  ----- ', function () {
 	})
 
 	it('failed registration - username (required) attribute is missing', function (done) {
-		localHost.post('/user/register')
+		host.post('/user/register')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
@@ -116,7 +116,7 @@ describe('Registration based tests  ----- ', function () {
 	})
 
 	it('failed registration - password (required) attribute is missing', function (done) {
-		localHost.post('/user/register')
+		host.post('/user/register')
 			.set('Content-Type', 'application/json')
 			.set('Origin', 'http://ev-client.herokuapp.com')
 			.send({
