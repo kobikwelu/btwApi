@@ -100,4 +100,24 @@ describe('user based tests  ----- ', function () {
 			})
 	})
 
+	it('/api/v1/getUser - successful retrieval - incorrect username', function (done) {
+		host.post('/user/login')
+			.set('Content-Type', 'application/json')
+			.send({
+				"username": "testUser",
+				"password": "Aa5233713!"
+			})
+			.end(function (err, res) {
+				host.get('/api/v1/getUser')
+					.set('Content-Type', 'application/json')
+					.set('x-access-token', res.body.token)
+					.set('x-key', 'testUser')
+					.set('Origin', 'http://ev-client.herokuapp.com')
+					.end(function (err, res) {
+						expect(res.status).to.equal(200);
+						expect(res.body.message).to.equal('User information successfully retrieved');
+						done();
+					})
+			})
+	})
 })

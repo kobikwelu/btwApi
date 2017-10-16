@@ -33,11 +33,16 @@ router.get('/getAllChargingPointsMetaData', function (req, res) {
 });
 
 router.get('/getChargingPointMetaData', function (req, res) {
-	console.log('***** get charging point Meta dat route processing....');
+	console.log('***** get charging point Meta data route processing....');
 	var charge = chargePoint();
 	charge.getChargingPointMetaData(req, res)
 });
 
+router.get('/getUser', function (req, res) {
+	console.log('***** get user route processing....');
+	var activeAuth = auth();
+	activeAuth.getUser(req, res);
+});
 
 
 router.post('/registerChargingPoint', function (req, res) {
@@ -63,7 +68,7 @@ router.post('/deleteUser', function (req, res) {
 	activeAuth.deleteUser(req, res);
 });
 
-router.put('/UpdateUser', function (req, res) {
+router.put('/updateUser', function (req, res) {
 	console.log('***** modify User route processing....');
 	var activeAuth = auth();
 	activeAuth.modifyUser(req, res);

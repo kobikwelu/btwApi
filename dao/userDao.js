@@ -15,14 +15,15 @@ var mongoDBCPTest = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.k
 
 module.exports = function () {
 
-	function genToken(role, username) {
+	function genToken(role, username, email) {
 		console.log('getToken starts....');
 		var expires = expiresIn(0.0098);
 		var token = jwt.encode({
-			issuer: 'http://ev-client.herokuapp.com',
-			exp : expires,
-			role: role,
-			username: username
+			issuer  : 'http://ev-client.herokuapp.com',
+			exp     : expires,
+			role    : role,
+			username: username,
+			email: email
 		}, require('../config/secret')());
 		return {
 			token  : token,
@@ -65,7 +66,7 @@ module.exports = function () {
 							bcrypt.compare(item[1], docs[0]['user']['password'], function (err, doesMatch) {
 								if (doesMatch) {
 									console.log('success!! issuing token..');
-									res.json(genToken(docs[0]['user']['role'], docs[0]['user']['username']));
+									res.json(genToken(docs[0]['user']['role'], docs[0]['user']['username'], docs[0]['user']['email']));
 								} else {
 									res.status(401);
 									res.json({
@@ -225,11 +226,11 @@ module.exports = function () {
 				mongoDBChargePointUser.EV_User.update({"user.email": item[1]},
 					{
 						$set: {
-								"user.address"    : item[2],
-								"user.dateOfBirth": item[3],
-								"user.carModel"   : item[4],
-								"user.thumbnail"  : item[5],
-								"user.gender"     : item[6]
+							"user.address"    : item[2],
+							"user.dateOfBirth": item[3],
+							"user.carModel"   : item[4],
+							"user.thumbnail"  : item[5],
+							"user.gender"     : item[6]
 						}
 					}, {
 						upsert: false,
@@ -253,6 +254,33 @@ module.exports = function () {
 			}
 		})
 	}
+	var getUser = function (item, table, res) {
+		mongoDBChargePointUser.EV_User.find({"user.email": item[1], "user.username": item[0]}, function (err, docs) {
+			if (typeof docs[0] === 'undefined') {
+				res.status(422);
+				res.json({
+					"status" : 422,
+					"message": "No user information returned"
+				});
+			} else {
+				res.status(200);
+				res.json({
+					"status"         : 200,
+					"message"        : "User information successfully retrieved",
+					"userInformation": {
+						username: docs[0]['user']['username'],
+						email: docs[0]['user']['email'],
+						role: docs[0]['user']['role'],
+						address: docs[0]['user']['address'],
+						gender: docs[0]['user']['gender'],
+						dateOfBirth: docs[0]['user']['dateOfBirth'],
+						carModel: docs[0]['user']['carModel'],
+						thumbnail: docs[0]['user']['thumbnail']
+					}
+				});
+			}
+		});
+	}
 
 
 	return {
@@ -275,6 +303,10 @@ module.exports = function () {
 		modifyUser      : function (item, table, res) {
 			console.log('***** USERDAO modifyUser processing .....');
 			modifyUser(item, table, res)
+		},
+		getUser         : function (item, table, res) {
+			console.log('***** USERDAO getUser processing .....');
+			getUser(item, table, res)
 		}
 
 	}
