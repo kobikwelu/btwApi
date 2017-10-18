@@ -26,6 +26,8 @@ describe('user based tests  ----- ', function () {
 					.send({
 						"username"   : "testUser",
 						"email"      : "testuser@yahoo.com",
+						"firstname"  : "Sarah",
+						"lastname"   : "McMann",
 						"address"    : "Springfield Pasadeana",
 						"dateOfBirth": "12-oct-1995",
 						"carModel"   : "Escalade 2018",
@@ -56,6 +58,8 @@ describe('user based tests  ----- ', function () {
 					.send({
 						"username"   : "testUser",
 						"email"      : "bad@email.com",
+						"firstname"  : "Sarah",
+						"lastname"   : "McMann",
 						"address"    : "Springfield Pasadeana",
 						"dateOfBirth": "12-oct-1995",
 						"carModel"   : "Escalade 2018",
@@ -86,6 +90,8 @@ describe('user based tests  ----- ', function () {
 					.send({
 						"username"   : "badUser",
 						"email"      : "test@test.com",
+						"firstname"  : "Sarah",
+						"lastname"   : "McMann",
 						"address"    : "Springfield Pasadeana",
 						"dateOfBirth": "12-oct-1995",
 						"carModel"   : "Escalade 2018",
