@@ -23,7 +23,7 @@ module.exports = function () {
 			exp     : expires,
 			role    : role,
 			username: username,
-			email: email
+			email   : email
 		}, require('../config/secret')());
 		return {
 			token  : token,
@@ -226,11 +226,13 @@ module.exports = function () {
 				mongoDBChargePointUser.EV_User.update({"user.email": item[1]},
 					{
 						$set: {
-							"user.address"    : item[2],
-							"user.dateOfBirth": item[3],
-							"user.carModel"   : item[4],
-							"user.thumbnail"  : item[5],
-							"user.gender"     : item[6]
+							"user.firstname"  : item[2],
+							"user.lastname"   : item[3],
+							"user.address"    : item[4],
+							"user.dateOfBirth": item[5],
+							"user.carModel"   : item[6],
+							"user.thumbnail"  : item[7],
+							"user.gender"     : item[8]
 						}
 					}, {
 						upsert: false,
@@ -268,14 +270,16 @@ module.exports = function () {
 					"status"         : 200,
 					"message"        : "User information successfully retrieved",
 					"userInformation": {
-						username: docs[0]['user']['username'],
-						email: docs[0]['user']['email'],
-						role: docs[0]['user']['role'],
-						address: docs[0]['user']['address'],
-						gender: docs[0]['user']['gender'],
+						username   : docs[0]['user']['username'],
+						email      : docs[0]['user']['email'],
+						firstname  : docs[0]['user']['firstname'],
+						lastname   : docs[0]['user']['lastname'],
+						role       : docs[0]['user']['role'],
+						address    : docs[0]['user']['address'],
+						gender     : docs[0]['user']['gender'],
 						dateOfBirth: docs[0]['user']['dateOfBirth'],
-						carModel: docs[0]['user']['carModel'],
-						thumbnail: docs[0]['user']['thumbnail']
+						carModel   : docs[0]['user']['carModel'],
+						thumbnail  : docs[0]['user']['thumbnail']
 					}
 				});
 			}

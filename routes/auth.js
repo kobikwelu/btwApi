@@ -86,6 +86,8 @@ module.exports = function () {
 		},
 		modifyUser  : function (req, res) {
 			console.log('***** Auth route ..... modify user processing....');
+			var firstname = req.body.firstname || '';
+			var lastname = req.body.lastname || '';
 			var username = req.body.username || '';
 			var address = req.body.address || '';
 			var dateOfBirth = req.body.dateOfBirth || '';
@@ -94,7 +96,8 @@ module.exports = function () {
 			var gender = req.body.gender || '';
 			var email = req.body.email || '';
 
-			if (username === '' || address === '' || dateOfBirth === '' || carModel === '' || thumbnail === '' || gender === '' || email === '') {
+			if (firstname === '' || lastname === '' ||username === '' || address === '' || dateOfBirth === ''
+				|| carModel === '' || thumbnail === '' || gender === '' || email === '') {
 				res.status(422);
 				res.json({
 					"status" : 422,
@@ -104,6 +107,8 @@ module.exports = function () {
 				var payLoad = [];
 				payLoad.push(username);
 				payLoad.push(email);
+				payLoad.push(firstname);
+				payLoad.push(lastname);
 				payLoad.push(address);
 				payLoad.push(dateOfBirth);
 				payLoad.push(carModel);
