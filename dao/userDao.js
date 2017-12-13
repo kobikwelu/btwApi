@@ -290,7 +290,7 @@ module.exports = function () {
 	var addCaptain = function (item, table, res) {
 		if (table === 'user') {
 			console.log('checking if user exists');
-			
+
 			mongoDBBTWCaptain.BTW_Captain.find({"captain.email": item[2]}, function (err, docs) {
 				if (typeof docs[0] === 'undefined') {
 					console.log('Account does not exist');

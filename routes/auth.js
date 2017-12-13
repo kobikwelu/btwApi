@@ -158,7 +158,7 @@ module.exports = function () {
 			var lastName = req.body.lastname || '';
 			var email = req.body.email || '';
 
-			if (firstName === '' || lastName === '' || email) {
+			if (firstName === '' || lastName === '' || email === '') {
 				res.status(401);
 				res.json({
 					"status" : 401,
