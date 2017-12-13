@@ -287,10 +287,9 @@ module.exports = function () {
 		});
 	}
 
-	var addCaptain = function (item, table, res) {
-		if (table === 'user') {
+	var addCaptain = function (item, table, req, res) {
+		if (table === 'captain') {
 			console.log('checking if user exists');
-
 			mongoDBBTWCaptain.BTW_Captain.find({"captain.email": item[2]}, function (err, docs) {
 				if (typeof docs[0] === 'undefined') {
 					console.log('Account does not exist');
@@ -359,9 +358,9 @@ module.exports = function () {
 			console.log('***** USERDAO getUser processing .....');
 			getUser(item, table, res)
 		},
-		addCaptain        : function (item, table, res) {
-			console.log('***** ADD captain processing .....');
-			addCaptain(item, table, res)
+		addCaptain        : function (item, table, req, res) {
+			console.log('***** ADD CAPTAIN processing .....');
+			addCaptain(item, table, req, res)
 		}
 
 	}
