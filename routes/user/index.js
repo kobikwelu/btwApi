@@ -19,4 +19,10 @@ router.post('/login', function (req, res) {
 	activeAuth.login(req, res);
 });
 
+router.post('/addCaptain', function (req, res) {
+	console.log('***** Add Captain route processing....');
+	var activeAuth = auth();
+	activeAuth.addCaptain(req, res);
+});
+
 module.exports = router;

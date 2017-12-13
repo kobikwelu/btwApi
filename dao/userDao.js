@@ -11,6 +11,7 @@ var mongo = require('../config');
 var port = 15214;
 var mongoDBChargePointUser = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.keys.mongo_password + '@ds115214.mlab.com:' + port + '/evpoint', [mongo.keys.mongo_collection_user]);
 var mongoDBCPTest = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.keys.mongo_password + '@ds115214.mlab.com:' + port + '/evpoint', [mongo.keys.mongo_collection_test]);
+var mongoDBBTWCaptain = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.keys.mongo_password + '@ds115214.mlab.com:' + port + '/evpoint', [mongo.keys.mongo_collection_btw_captain]);
 
 
 module.exports = function () {
@@ -286,6 +287,52 @@ module.exports = function () {
 		});
 	}
 
+	var addCaptain = function (item, table, res) {
+		if (table === 'user') {
+			console.log('checking if user exists');
+			
+			mongoDBBTWCaptain.BTW_Captain.find({"captain.email": item[2]}, function (err, docs) {
+				if (typeof docs[0] === 'undefined') {
+					console.log('Account does not exist');
+					console.log('insertion starts....');
+						console.log('insert action....');
+
+					var captain = {
+						"captain": {
+							"firstname": item[0],
+							"lastname": item[1],
+							"email"   : item[2]
+						}
+					};
+
+					mongoDBBTWCaptain.BTW_Captain.insert(captain, function (err, docs) {
+							if (err === null) {
+								console.log('insert done!!');
+								res.status(200);
+								res.json({
+									"status" : 200,
+									"message": "Account created successfully"
+								});
+							} else {
+								res.status(500);
+								res.json({
+									"status" : 500,
+									"message": "Internal Server Error"
+								});
+							}
+						})
+				} else {
+					res.status(401);
+					res.json({
+						"status" : 401,
+						"message": "A user with that email address already exists"
+					});
+				}
+			})
+		}
+	}
+
+
 
 	return {
 		createAccount   : function (item, table, res) {
@@ -310,6 +357,10 @@ module.exports = function () {
 		},
 		getUser         : function (item, table, res) {
 			console.log('***** USERDAO getUser processing .....');
+			getUser(item, table, res)
+		},
+		addCaptain        : function (item, table, res) {
+			console.log('***** ADD captain processing .....');
 			getUser(item, table, res)
 		}
 

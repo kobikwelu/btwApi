@@ -96,7 +96,7 @@ module.exports = function () {
 			var gender = req.body.gender || '';
 			var email = req.body.email || '';
 
-			if (firstname === '' || lastname === '' ||username === '' || address === '' || dateOfBirth === ''
+			if (firstname === '' || lastname === '' || username === '' || address === '' || dateOfBirth === ''
 				|| carModel === '' || thumbnail === '' || gender === '' || email === '') {
 				res.status(422);
 				res.json({
@@ -151,10 +151,30 @@ module.exports = function () {
 				}
 
 			}
+		},
+		addCaptain  : function (req, res) {
+			console.log('***** Add Captain route.....add captain processing....');
+			var firstName = req.body.firstname || '';
+			var lastName = req.body.lastname || '';
+			var email = req.body.email || '';
 
+			if (firstName === '' || lastName === '' || email) {
+				res.status(401);
+				res.json({
+					"status" : 401,
+					"message": "Missing required field "
+				});
+			} else {
+				var payLoad = [];
+				payLoad.push(firstName);
+				payLoad.push(lastName);
+				payLoad.push(email);
+
+				var dao = userDao();
+				dao.addCaptain(payLoad, 'captain', req, res);
+			}
 
 		}
-
 	}
 }
 
