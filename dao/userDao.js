@@ -361,7 +361,7 @@ module.exports = function () {
 		},
 		addCaptain        : function (item, table, res) {
 			console.log('***** ADD captain processing .....');
-			getUser(item, table, res)
+			addCaptain(item, table, res)
 		}
 
 	}
