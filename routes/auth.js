@@ -1,10 +1,10 @@
 /**
- * Created by kennethobikwelu on 8/11/17.
+ * Created by kennethobikwelu on 1/22/18.
  */
 
 
-import userDao from '../dao/userDao'
-import jwt from 'jwt-simple'
+let userDao = require('../dao/userDao');
+let jwt = require ('jwt-simple');
 
 module.exports = function () {
 

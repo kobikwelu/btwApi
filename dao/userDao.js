@@ -4,13 +4,13 @@
 
 
 let mongoJs = require('mongojs');
+let bcrypt =  require('bcrypt');
+let jwt =  require('jwt-simple');
+let mongo = require('../config')
 
-import bcrypt from 'bcrypt'
-import jwt from 'jwt-simple';
-import mongo from '../config'
 
 const saltRounds = 10;
-let port = 63707;
+const port = 63707;
 let mongoDB_Btw_user = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.keys.mongo_password + '@ds263707.mlab.com:' + port + '/btw_18', [mongo.keys.mongo_collection_user]);
 
 module.exports = function () {

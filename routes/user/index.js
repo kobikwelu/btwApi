@@ -3,9 +3,9 @@
  */
 
 
-import express from 'express';
-import auth from '../auth.js'
+let express = require('express');
 let router = express.Router();
+let auth = require('../auth.js')
 
 
 router.post('/register', function (req, res) {

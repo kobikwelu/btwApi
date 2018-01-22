@@ -2,12 +2,11 @@
  * Created by kennethobikwelu on 1/22/18.
  */
 
-import 'newrelic'
-import express from 'express'
-import bodyParser from 'body-parser';
-import logger from 'morgan';
-import RateLimit from 'express-rate-limit';
-
+require ('newrelic')
+let express = require('express');
+let bodyParser = require('body-parser')
+let logger = require('morgan');
+let RateLimit = require('express-rate-limit');
 
 let app = express();
 

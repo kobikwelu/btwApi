@@ -2,9 +2,8 @@
  * Created by kennethobikwelu on 1/22/18.
  */
 
-
-import jwt from 'jwt-simple'
-import authValidate from '../routes/auth';
+let jwt = require ('jwt-simple');
+let authValidate = require ('../routes/auth');
 
 module.exports = function (req, res, next) {
 
