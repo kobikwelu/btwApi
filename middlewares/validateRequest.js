@@ -1,22 +1,22 @@
 /**
- * Created by kennethobikwelu on 8/11/17.
+ * Created by kennethobikwelu on 1/22/18.
  */
 
-var jwt = require('jwt-simple');
-var authValidate = require('../routes/auth');
 
+import jwt from 'jwt-simple'
+import authValidate from '../routes/auth';
 
 module.exports = function (req, res, next) {
 
 	console.log('********Validating request....');
-	var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
-	var key = (req.body && req.body.x_key) || (req.query && req.query.x_key) || req.headers['x-key'];
-	var origin = req.get('origin');
+	let token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+	let key = (req.body && req.body.x_key) || (req.query && req.query.x_key) || req.headers['x-key'];
+	let origin = req.get('origin');
 
 	console.log('Checking token/key....');
 	if (token && key && origin) {
 		try {
-			var decoded = jwt.decode(token, require('../config/secret.js')());
+			let decoded = jwt.decode(token, require('../config/secret.js')());
 			if (decoded.exp <= Date.now()) {
 				console.log('token not valid....');
 				res.status(400);
@@ -27,14 +27,14 @@ module.exports = function (req, res, next) {
 			} else {
 				console.log('token is still valid. Proceeding to next check');
 				//remove this fix when the time is right - This is dev's access to the server
-				if (decoded.issuer === origin || origin === 'http://localhost:8080') {
+				if (decoded.issuer === origin) {
 					console.log('request coming from a trusted issuer');
 					if (decoded.username === key){
 						console.log('token user and username matches');
 						// Authorize the user to see if s/he can access our resources
 						console.log('Checking Authorization....');
-						var auth = authValidate();
-						var item = [];
+						let auth = authValidate();
+						let item = [];
 						item.push(key);
 						auth.getRole(item, req, res, next)
 					}else{

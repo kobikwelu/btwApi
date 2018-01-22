@@ -1,14 +1,15 @@
 /**
- * Created by kennethobikwelu on 8/11/17.
+ * Created by kennethobikwelu on 1/22/18.
  */
 
-require('newrelic');
-var express = require('express');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
+import 'newrelic'
+import express from 'express'
+import bodyParser from 'body-parser';
+import logger from 'morgan';
+import RateLimit from 'express-rate-limit';
 
 
-var app = express();
+let app = express();
 
 /**
  * Middleware
@@ -20,17 +21,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-var RateLimit = require('express-rate-limit');
 
 app.enable('trust proxy');
 
-var limiter = new RateLimit({
+let limiter = new RateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
 	max     : 4500, // limit each IP to 100 requests per windowMs
 	delayMs : 0 // disable delaying - full speed until the max limit is reached
 });
 
-//  apply to all requests
+// apply to all requests
 //may need to ration access based on specific roles
 app.use(limiter);
 
@@ -48,6 +48,7 @@ app.all('/*', function (req, res, next) {
 	}
 });
 
+//add route validator over here
 app.all('/api/v1/*', [require('./middlewares/validateRequest')]);
 
 app.use('/', require('./routes/index'));
@@ -55,7 +56,7 @@ app.use('/', require('./routes/index'));
 
 // If no route is matched by now, it must be a 404
 app.use(function (req, res, next) {
-	var err = new Error('No resource found');
+	let err = new Error('No resource found');
 	err.status = 404;
 	next(err);
 });
@@ -63,11 +64,11 @@ app.use(function (req, res, next) {
 // Start the server
 app.set('port', process.env['PORT'] || 4252);
 
-var server = app.listen(app.get('port'), function () {
+let server = app.listen(app.get('port'), function () {
 	console.log('###########################################################################################');
 	console.log('###########################################################################################');
 	console.log('Express server listening on port ' + server.address().port);
-	console.log('Property of EVPoint');
+	console.log('Property of be the wave');
 });
 
 module.exports = app;

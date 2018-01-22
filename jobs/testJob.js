@@ -11,6 +11,8 @@ var mongoDBAgendaJobs = mongoJs('mongodb://' + mongo.keys.mongo_user
 var mongoDBChargePointUser = mongoJs('mongodb://' + mongo.keys.mongo_user
 	+ ':' + mongo.keys.mongo_password + '@ds115214.mlab.com:' + port + '/evpoint', [mongo.keys.mongo_collection_user]);
 
+var mongoDBUserNotification = mongoJs('mongodb://' + mongo.keys.mongo_user
+	+ ':' + mongo.keys.mongo_password + '@ds115214.mlab.com:' + port + '/evpoint', [mongo.keys.mongo_collection_userNotification]);
 
 
 var agenda = new Agenda({db: {address: mongoDBAgendaJobs}});
@@ -18,6 +20,8 @@ var agenda = new Agenda({db: {address: mongoDBAgendaJobs}});
 //this job should have the query for searching the DB to pull the information from user collection
 agenda.define('say hello', function (job, done) {
 	console.log('hello world');
+
+
 	})
 
 agenda.on('ready', function(){

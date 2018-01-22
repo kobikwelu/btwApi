@@ -1,10 +1,10 @@
 {
-  "name": "EVPoint",
-  "version": "6.2.0",
-  "decription": "crawler",
+  "name": "btw.org",
+  "version": "0.0.0",
+  "decription": "Api supporting bethewave",
   "author": "Kenneth Obikwelu",
-  "main": "crawler.js",
-  "license": "ISC",
+  "main": "server.js",
+  "license": "MIT",
   "dependencies": {
     "agenda": "^1.0.1",
     "bcrypt": "^1.0.2",

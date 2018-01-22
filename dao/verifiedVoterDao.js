@@ -4,7 +4,7 @@
 
 var mongoJs = require('mongojs');
 var mongo = require('../config');
-var port = 15214;
+var port = 63707;
 var mongoDBChargePoints = mongoJs('mongodb://' + mongo.keys.mongo_user + ':' + mongo.keys.mongo_password + '@ds115214.mlab.com:' + port + '/evpoint', [mongo.keys.mongo_collection_chargePoint]);
 
 module.exports = function () {

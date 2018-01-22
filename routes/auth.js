@@ -2,8 +2,9 @@
  * Created by kennethobikwelu on 8/11/17.
  */
 
-var userDao = require('../dao/userDao');
-var jwt = require('jwt-simple');
+
+import userDao from '../dao/userDao'
+import jwt from 'jwt-simple'
 
 module.exports = function () {
 
@@ -11,10 +12,17 @@ module.exports = function () {
 	return {
 		registerUser: function (req, res) {
 			console.log('***** Auth register.....registration processing....');
-			var username = req.body.username || '';
-			var password = req.body.password || '';
-			var email = req.body.email || '';
-			var role = req.body.role || '';
+			let username = req.body.username || '';
+			let password = req.body.password || '';
+			let email = req.body.email || '';
+			let role = req.body.role || '';
+
+			let firstname = req.body.firstname || '';
+			let lastname = req.body.lastname || '';
+			let address = req.body.address || '';
+			let phoneNumber = req.body.phoneNumber || '';
+			let dateOfBirth = req.body.dateOfBirth || '';
+
 
 			if (username === '' || password === '' || email === '' || role === '') {
 				res.status(422);
@@ -23,20 +31,25 @@ module.exports = function () {
 					"message": "Missing required parameters"
 				});
 			} else {
-				var payLoad = [];
+				let payLoad = [];
 				payLoad.push(username);
 				payLoad.push(password);
 				payLoad.push(email);
 				payLoad.push(role);
 
-				var dao = userDao();
-				dao.createAccount(payLoad, 'user', res);
+				payLoad.push(firstname);
+				payLoad.push(lastname);
+				payLoad.push(address);
+				payLoad.push(phoneNumber);
+				payLoad.push(dateOfBirth);
+
+				userDao().createAccount(payLoad, res);
 			}
 		},
 		login       : function (req, res) {
-			console.log('***** Auth route.....login processing....');
-			var username = req.body.username || '';
-			var password = req.body.password || '';
+			console.log('***** Auth login.....login processing....');
+			let username = req.body.username || '';
+			let password = req.body.password || '';
 
 			if (username === '' || password === '') {
 				res.status(401);
@@ -45,12 +58,11 @@ module.exports = function () {
 					"message": "Invalid credentials"
 				});
 			} else {
-				var payLoad = [];
+				let payLoad = [];
 				payLoad.push(username);
 				payLoad.push(password);
 
-				var dao = userDao();
-				dao.authenticateUser(payLoad, 'user', req, res);
+				userDao().authenticateUser(payLoad, req, res);
 			}
 		},
 		getRole     : function (item, req, res, next) {
@@ -151,29 +163,6 @@ module.exports = function () {
 				}
 
 			}
-		},
-		addCaptain  : function (req, res) {
-			console.log('***** Add Captain route.....add captain processing....');
-			var firstName = req.body.firstname || '';
-			var lastName = req.body.lastname || '';
-			var email = req.body.email || '';
-
-			if (firstName === '' || lastName === '' || email === '') {
-				res.status(401);
-				res.json({
-					"status" : 401,
-					"message": "Missing required field "
-				});
-			} else {
-				var payLoad = [];
-				payLoad.push(firstName);
-				payLoad.push(lastName);
-				payLoad.push(email);
-
-				var dao = userDao();
-				dao.addCaptain(payLoad, 'captain', req, res);
-			}
-
 		}
 	}
 }

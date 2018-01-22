@@ -1,28 +1,23 @@
 /**
- * Created by KennethObikwelu on 9/16/17.
+ * Created by KennethObikwelu on 1/22/18.
  */
 
-var express = require('express');
-var router = express.Router();
-var auth = require('../auth.js');
+
+import express from 'express';
+import auth from '../auth.js'
+let router = express.Router();
 
 
 router.post('/register', function (req, res) {
-	console.log('***** register route processing....');
-	var activeAuth = auth();
+	console.log('***** Register route processing....');
+	let activeAuth = auth();
 	activeAuth.registerUser(req, res);
 });
 
 router.post('/login', function (req, res) {
 	console.log('***** Login route processing....');
-	var activeAuth = auth();
+	let activeAuth = auth();
 	activeAuth.login(req, res);
-});
-
-router.post('/addCaptain', function (req, res) {
-	console.log('***** Add Captain route processing....');
-	var activeAuth = auth();
-	activeAuth.addCaptain(req, res);
 });
 
 module.exports = router;
