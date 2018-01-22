@@ -20,11 +20,17 @@ module.exports = function () {
 			let firstname = req.body.firstname || '';
 			let lastname = req.body.lastname || '';
 			let address = req.body.address || '';
-			let phoneNumber = req.body.phoneNumber || '';
-			let dateOfBirth = req.body.dateOfBirth || '';
+			let phonenumber = req.body.phonenumber || '';
+			let dateofbirth = req.body.dateofbirth.$date || '';
 
+			let isProfileComplete = false;
+			if (username !== '' && password !== '' && email !== '' && role !== '' &&
+				firstname !== '' && lastname !== '' && address !== '' && phonenumber !== ''
+				&& dateofbirth !== '') {
+				 isProfileComplete = true
+			}
 
-			if (username === '' || password === '' || email === '' || role === '') {
+			if (username === '' || password === '' || email === '') {
 				res.status(422);
 				res.json({
 					"status" : 422,
@@ -40,8 +46,9 @@ module.exports = function () {
 				payLoad.push(firstname);
 				payLoad.push(lastname);
 				payLoad.push(address);
-				payLoad.push(phoneNumber);
-				payLoad.push(dateOfBirth);
+				payLoad.push(phonenumber);
+				payLoad.push(dateofbirth);
+				payLoad.push(isProfileComplete);
 
 				userDao().createAccount(payLoad, res);
 			}

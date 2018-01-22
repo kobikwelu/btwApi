@@ -4,8 +4,8 @@
 
 
 let mongoJs = require('mongojs');
-let bcrypt =  require('bcrypt');
-let jwt =  require('jwt-simple');
+let bcrypt = require('bcrypt');
+let jwt = require('jwt-simple');
 let mongo = require('../config')
 
 
@@ -29,6 +29,7 @@ module.exports = function () {
 		}, require('../config/secret')());
 		return {
 			token  : token,
+			issuedAt : issuedAt,
 			expires: expiresAt
 		};
 	}
@@ -104,15 +105,16 @@ module.exports = function () {
 				bcrypt.hash(item[1], saltRounds, (err, bcryptedPassword) => {
 					let usernameWithHashedPassword = {
 						"user": {
-							"username"   : item[0],
-							"password"   : bcryptedPassword,
-							"email"      : item[2],
-							"role"       : item[3],
-							"firstname"  : item[4],
-							"lastname"   : item[5],
-							"address"    : item[6],
-							"phonenumber": item[7],
-							"dateofbirth": item[8]
+							"username"         : item[0],
+							"password"         : bcryptedPassword,
+							"email"            : item[2],
+							"role"             : item[3],
+							"firstname"        : item[4],
+							"lastname"         : item[5],
+							"address"          : item[6],
+							"phonenumber"      : item[7],
+							"dateofbirth"      : item[8],
+							"isProfileComplete": item[9]
 						}
 					};
 					console.log('insert action....')

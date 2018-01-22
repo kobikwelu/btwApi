@@ -2,7 +2,7 @@
  * Created by kennethobikwelu on 1/22/18.
  */
 
-require ('newrelic')
+require ('newrelic');
 let express = require('express');
 let bodyParser = require('body-parser')
 let logger = require('morgan');
