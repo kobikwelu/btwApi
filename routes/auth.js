@@ -21,7 +21,7 @@ module.exports = function () {
 			let lastname = req.body.lastname || '';
 			let address = req.body.address || '';
 			let phonenumber = req.body.phonenumber || '';
-			let dateofbirth = req.body.dateofbirth.$date || '';
+			let dateofbirth = req.body.dateofbirth || '';
 
 			let isProfileComplete = false;
 			if (username !== '' && password !== '' && email !== '' && role !== '' &&
