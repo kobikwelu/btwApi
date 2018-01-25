@@ -76,7 +76,7 @@ module.exports = function () {
 			if (typeof item === 'undefined') {
 				//do nothing
 			} else {
-				var dao = userDao();
+				let dao = userDao();
 				dao.getRole(item, req, res, next);
 			}
 		},

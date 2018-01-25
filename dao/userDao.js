@@ -154,8 +154,8 @@ module.exports = function () {
 	 * @param res
 	 * @param next
 	 */
-	var getUserRole = function (item, req, res, next) {
-		mongoDBChargePointUser.EV_User.find({"user.username": item[0]}, function (err, docs) {
+	let getUserRole = function (item, req, res, next) {
+		mongoDB_Btw_user.btw_user.find({"user.username": item[0]}, function (err, docs) {
 			if (err === null) {
 				if (typeof docs[0] === 'undefined') {
 					res.status(401);
@@ -164,7 +164,7 @@ module.exports = function () {
 						"message": "Invalid User"
 					});
 				} else {
-					if ((req.url.indexOf('admin') >= 0 && docs[0]['user']['role'] === 'admin') || (req.url.indexOf('admin') < 0 && req.url.indexOf('/api/v1/') >= 0)) {
+					if ((req.url.indexOf('captain') >= 0 && docs[0]['user']['role'] === 'captain') || (req.url.indexOf('captain') < 0 && req.url.indexOf('/api/v1/') >= 0)) {
 						console.log('user is authorized to access the resource' + req.url);
 						next();
 					} else {
@@ -272,7 +272,9 @@ module.exports = function () {
 	 * @param res
 	 */
 	let getUser = function (item, res) {
-		mongoDB_Btw_user.btw_user.find.find({"user.email": item[1], "user.username": item[0]}, function (err, docs) {
+		console.log('getUser function db action start')
+		mongoDB_Btw_user.btw_user.find({"user.email": item[1], "user.username": item[0]}, function (err, docs) {
+
 			if (typeof docs[0] === 'undefined') {
 				res.status(422);
 				res.json({
