@@ -140,19 +140,19 @@ module.exports = function () {
 
 		},
 		getUser     : function (req, res) {
-			var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+			let token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
 			if (token) {
 				try {
-					var decoded = jwt.decode(token, require('../config/secret.js')());
+					let decoded = jwt.decode(token, require('../config/secret.js')());
 					if (decoded.username && decoded.email) {
-						console.log('***** Auth route ..... get user processing....');
+						console.log('***** Auth route ..... get user details processing....');
 
-						var payLoad = [];
+						let payLoad = [];
 						payLoad.push(decoded.username);
 						payLoad.push(decoded.email);
 
-						var dao = userDao();
-						dao.getUser(payLoad, 'user', res);
+						let dao = userDao();
+						dao.getUser(payLoad, res);
 					} else {
 						res.status(403);
 						res.json({

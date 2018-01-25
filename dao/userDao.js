@@ -264,8 +264,15 @@ module.exports = function () {
 			}
 		})
 	}
-	var getUser = function (item, table, res) {
-		mongoDBChargePointUser.EV_User.find({"user.email": item[1], "user.username": item[0]}, function (err, docs) {
+
+	/**
+	 *
+	 * @param item
+	 * @param table
+	 * @param res
+	 */
+	let getUser = function (item, res) {
+		mongoDB_Btw_user.btw_user.find.find({"user.email": item[1], "user.username": item[0]}, function (err, docs) {
 			if (typeof docs[0] === 'undefined') {
 				res.status(422);
 				res.json({
@@ -283,11 +290,9 @@ module.exports = function () {
 						firstname  : docs[0]['user']['firstname'],
 						lastname   : docs[0]['user']['lastname'],
 						role       : docs[0]['user']['role'],
-						address    : docs[0]['user']['address'],
-						gender     : docs[0]['user']['gender'],
-						dateOfBirth: docs[0]['user']['dateOfBirth'],
-						carModel   : docs[0]['user']['carModel'],
-						thumbnail  : docs[0]['user']['thumbnail']
+						dateofbirth: docs[0]['user']['dateofbirth'],
+						address   : docs[0]['user']['address'],
+						phonenumber  : docs[0]['user']['phonenumber']
 					}
 				});
 			}
@@ -360,9 +365,9 @@ module.exports = function () {
 			console.log('***** USERDAO modifyUser processing .....');
 			modifyUser(item, table, res)
 		},
-		getUser         : function (item, table, res) {
+		getUser         : function (item, res) {
 			console.log('***** USERDAO getUser processing .....');
-			getUser(item, table, res)
+			getUser(item, res)
 		},
 		addCaptain      : function (item, table, req, res) {
 			console.log('***** ADD CAPTAIN processing .....');
