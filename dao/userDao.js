@@ -6,7 +6,7 @@
 let mongoJs = require('mongojs');
 let bcrypt = require('bcrypt');
 let jwt = require('jwt-simple');
-let mongo = require('../config')
+let mongo = require('../config');
 
 
 const saltRounds = 10;
@@ -20,7 +20,7 @@ module.exports = function () {
 		let expiresAt = expiresIn(0.0098);
 		let issuedAt = getCurrentTime();
 		let token = jwt.encode({
-			issuer   : '',
+			issuer   : "https://btwUI-18.herokuapp.com",
 			issuedAt : issuedAt,
 			expiresAt: expiresAt,
 			role     : role,
@@ -268,7 +268,6 @@ module.exports = function () {
 	/**
 	 *
 	 * @param item
-	 * @param table
 	 * @param res
 	 */
 	let getUser = function (item, res) {
@@ -287,6 +286,7 @@ module.exports = function () {
 					"status"         : 200,
 					"message"        : "User information successfully retrieved",
 					"userInformation": {
+						id: docs[0]['_id']['$oid'],
 						username   : docs[0]['user']['username'],
 						email      : docs[0]['user']['email'],
 						firstname  : docs[0]['user']['firstname'],

@@ -5,10 +5,10 @@
 
 let express = require('express');
 let router = express.Router();
-//var chargePoint = require('../../chargePoint.js');
+let voter = require('../../voter.js');
 //var chargeMetaData = require('../../chargeMetaData.js');
 //var modifyAttribute = require('../../modifyAttribute.js');
-var auth = require('../../auth.js');
+let auth = require('../../auth.js');
 
 
 /*
@@ -45,11 +45,14 @@ router.get('/getUser', function (req, res) {
 });
 
 
-/*router.post('/registerChargingPoint', function (req, res) {
-	console.log('***** add charging point route processing....');
-	var charge = chargePoint();
+router.post('/addVoter', function (req, res) {
+	console.log('***** add voter route processing....');
+	let newVoter = voter();
+	newVoter.addVoter(req, res);
 });
 
+
+/*
 router.put('/updateChargingPoint', function (req, res) {
 	console.log('***** update charging point route processing....');
 	var charge = chargePoint();
@@ -66,13 +69,14 @@ router.post('/deleteUser', function (req, res) {
 	console.log('***** delete User route processing....');
 	var activeAuth = auth();
 	activeAuth.deleteUser(req, res);
-});*/
+});
 
 router.put('/updateUser', function (req, res) {
 	console.log('***** modify User route processing....');
 	var activeAuth = auth();
 	activeAuth.modifyUser(req, res);
 });
+*/
 
 
 module.exports = router;

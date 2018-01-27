@@ -16,7 +16,11 @@ module.exports = function (req, res, next) {
 	if (token && key && origin) {
 		try {
 			let decoded = jwt.decode(token, require('../config/secret.js')());
-			if (decoded.exp <= Date.now()) {
+
+			for (let x in decoded){
+				console.log(' is ' + x);
+			}
+			if (decoded.expiresAt <= Date.now()) {
 				console.log('token not valid....');
 				res.status(400);
 				res.json({
@@ -26,6 +30,8 @@ module.exports = function (req, res, next) {
 			} else {
 				console.log('token is still valid. Proceeding to next check');
 				//remove this fix when the time is right - This is dev's access to the server
+				console.log('1' + decoded.issuer);
+				console.log('2' + origin);
 				if (decoded.issuer === origin || origin === 'http://localhost:3000') {
 					console.log('request coming from a trusted issuer');
 					if (decoded.username === key){
