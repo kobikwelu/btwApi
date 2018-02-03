@@ -9,6 +9,6 @@ let router = express.Router();
  */
 router.use('/user', require('./user/index.js'));
 router.use('/api/v1', require('./api/v1/index.js'));
-router.use('/loaderio-de3087e5b90705fb70ef1533718f6054', require('./loaderio-de3087e5b90705fb70ef1533718f6054.txt'))
+router.use('/loaderio-de3087e5b90705fb70ef1533718f6054', require('./loaderio-de3087e5b90705fb70ef1533718f6054'))
 
 module.exports = router;
